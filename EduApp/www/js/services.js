@@ -1,5 +1,41 @@
 angular.module('starter.services', [])
+.service('kiddyServices',function($http){
+  var submitPayment =  function(postDetail, callback,errorCallback){
+    $http({
+        method: "POST",
+        headers: {"Content-Type": 'application/xml'},
+        url: 'http://dmartin.org:8024/moneysend/v2/transfer',
+        data: postDetail
+    }).then(callback, errorCallback)
+    
+   }
+    
+    return {
+    submitPayment: submitPayment
+  };
+})
+.service('qresponseService', function() {
+  var qAnswerList = [];
 
+  var addQAnswer = function(newObj) {
+      qAnswerList.push(newObj);
+  };
+
+  var getQAnswers = function(){
+      return qAnswerList;
+  };
+  
+  var clearQAnswers = function(){
+      qAnswerList=[];
+  };
+
+  return {
+    addQAnswer: addQAnswer,
+    getQAnswers: getQAnswers,
+    clearQAnswers:clearQAnswers
+  };
+
+})
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array
 

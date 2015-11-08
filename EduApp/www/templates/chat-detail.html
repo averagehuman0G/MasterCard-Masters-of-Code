@@ -6,7 +6,7 @@
 -->
 <ion-view view-title="{{chat.name}}">
   <ion-content class="padding">
-    <img ng-src="{{chat.face}}" style="width: 64px; height: 64px">
+    <img ng-src="{{chat.face}}" id="kidsImg">
     <div id="moneyAmounts">
       <button class="button button-calm">
   $2
@@ -22,8 +22,15 @@
 </button>
     </div>
     <div id='anyAmount'>
-      <input type="text" name="Allowence"/>
-    <input type="submit" value="Submit"/>
+      <div class="list list-inset ">
+  <label class="item item-input ">
+    <i class="icon ion-cash placeholder-icon cash-big"></i>
+    <input type="text" placeholder="allownace">
+  </label>
+</div>
+    <input type="submit" value="Submit" ng-click="submitMyPayment()"/>
+              <a class="button button-full button-balanced" href="#/tab/facts/11/50">Submitmypayment</a>
+
     </div>
     
   </ion-content>

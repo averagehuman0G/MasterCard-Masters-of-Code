@@ -81,12 +81,34 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
         }
       }
     })
+    
+     .state('tab.eduset', {
+       url: '/facts/:chatId/:amount',
+      views: {
+        'tab-dash': {
+          templateUrl: "templates/tab-account.html",
+          controller: 'AccountCtrl'
+        }
+      }
+    })
+    
+    
     .state('tab.questions', {
        url: '/questions/:sessionId',
       views: {
         'tab-dash': {
           templateUrl: "templates/view-questions.html",
           controller: 'CardsCtrl'
+        }
+      }
+    })
+    
+    .state('tab.endquestions', {
+       url: '/questions/end',
+      views: {
+        'tab-dash': {
+          templateUrl: "templates/question-end.html",
+          controller: 'EndQuestionsCtrl'
         }
       }
     })

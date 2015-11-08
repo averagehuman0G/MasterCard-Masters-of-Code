@@ -104,3 +104,24 @@
     margin-right:auto;
     display:block;
 }
+.cash-big{
+  font-size: 52px;
+}
+.ion-card-strong{
+  color: #387ef5
+}
+
+.spinner-p {
+  text-align: center;
+  margin-bottom: 40px !important;
+}
+.kidsImg {
+  height: 300px;
+  width: 221px ;
+  
+  
+}
+.spinner svg {
+  width: 19% !important;
+  height: 85px !important;
+}
