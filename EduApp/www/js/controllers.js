@@ -18,20 +18,26 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
+  console.log('$stateParams.chatId -->',$stateParams.chatId);
   $scope.chat = Chats.get($stateParams.chatId);
   
   //Add any parent submission info..
   $scope.submitMyPayment = function(){
-    alert("alert");
+   // alert("alert");
   }
+  
+  $scope.settings = {
+    enableFriends: true
+ 
+  };
 })
 
 .controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate,$state,$timeout,qresponseService,kiddyServices) {
-  var cardTypes = [{ title: 'Swipe down to clear the card', image: 'img/pic.png',id:1 }/*,
+  var cardTypes = [{ title: 'Swipe down to clear the card', image: 'img/pic.png',id:1 },
     { title: 'Where is this?', image: 'img/max.png',id:2 },
     { title: 'What kind of grass is this?', image: 'img/mike.png',id:3 },
     { title: 'What beach is this?', image: 'img/perry.png',id:4 },
-    { title: 'What kind of clouds are these?', image: 'img/liam.png',id:5 }*/];
+    { title: 'What kind of clouds are these?', image: 'img/liam.png',id:5 }];
     
     $scope.showCards = true;
 
@@ -114,6 +120,7 @@ angular.module('starter.controllers', [])
       var postData = postData1+rNum+postData2;
       $timeout(function(){
         console.log("success time out --->");
+        $scope.showCards = true;
         $state.go('tab.endquestions');
       }, 500);
       //Error --> Mixed Content: The page at 'https://edu-andreolf.c9users.io/EduApp/www/#/tab/questions/end' was loaded over HTTPS, but requested an insecure XMLHttpRequest endpoint 'http://dmartin.org:8024/moneysend/v2/transfer'. This request has been blocked; the content must be served over HTTPS.
@@ -147,6 +154,16 @@ angular.module('starter.controllers', [])
 .controller('EndQuestionsCtrl', function($scope, $ionicSwipeCardDelegate,qresponseService) {
   console.log('EndQuestionsCtrl -->');
 })
+
+.controller('SettingsCtrl', function($scope, $ionicSwipeCardDelegate,qresponseService) {
+  console.log('SettingsCtrl -->');
+  $scope.settings = {
+    enableNotifications: true
+ 
+  };
+})
+
+
 
 .controller('AccountCtrl', function($scope) {
   $scope.settings = {

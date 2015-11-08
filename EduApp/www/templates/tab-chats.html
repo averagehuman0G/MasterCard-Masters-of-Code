@@ -1,8 +1,13 @@
-<ion-view view-title="Chats">
+<ion-view view-title="Whom you want to send ?">
   <ion-content>
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats" type="item-text-wrap" href="#/tab/chats/{{chat.id}}">
-        <img ng-src="{{chats.face}}">
+        <ion-item class="item-profile">
+
+     <img ng-src="{{chats.face}}">
+ 
+  
+    
         <h2>{{chats.name}}</h2>
         <p>{{chats.age}}</p>
         <i class="icon ion-chevron-right icon-accessory"></i>

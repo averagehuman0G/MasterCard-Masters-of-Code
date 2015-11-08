@@ -14,6 +14,12 @@ angular.module('starter.services', [])
     submitPayment: submitPayment
   };
 })
+ .filter('split', function() {
+        return function(input, splitChar, splitIndex) {
+            // do some bounds checking here to ensure it has that index
+            return input.split(splitChar)[splitIndex];
+        }
+    })
 .service('qresponseService', function() {
   var qAnswerList = [];
 
@@ -42,7 +48,7 @@ angular.module('starter.services', [])
   // Some fake testing data
   var chats = [{
     id: 0,
-    name: 'Liam Williams',
+    name: 'Joe Williams',
     age: 'Age: 5',
     face: 'img/liam.png'
   }, {
