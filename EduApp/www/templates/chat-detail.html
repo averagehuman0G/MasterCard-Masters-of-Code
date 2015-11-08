@@ -6,7 +6,7 @@
 -->
 <ion-view view-title="{{chat.name}}">
   <ion-content class="padding">
-    <div ng-show="!showSuccess">
+    <div ng-show="!showSuccessFlag">
     <img ng-src="{{chat.face}}" id="kidsImg">
     <div id="moneyAmounts">
       <button class="button button-calm" ng-click="saveFor(chat,2)">
@@ -33,13 +33,13 @@
 
     </div>
     </div>
-    <div ng-show="showSuccess">
+    <div ng-show="showSuccessFlag">
       
       <div class="card">
   <div class="item item-divider">
     Success
   </div>
-  <div class="item item-text-wrap">
+  <div class="item item-text-wrap success-waiting">
     Transfer is initiated. {{chat.name.split(" ")[0]}} will love this.
   </div>
   <div class="item item-divider">

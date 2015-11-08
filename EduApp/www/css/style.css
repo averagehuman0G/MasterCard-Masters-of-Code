@@ -44,6 +44,13 @@
   border-radius: 0px 0px 4px 4px;
 }
 
+.success-waiting{
+  background-color:#ffc900;
+}
+.success-full{
+  background-color:#30BD8A;
+}
+
 #start-card {
   color: #fff;
   background-color: #30BD8A;

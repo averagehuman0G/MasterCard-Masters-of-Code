@@ -36,13 +36,26 @@ angular.module('starter.services', [])
   };
   var currentKid = {};
   var amt;
+  var earnedAmt;
   var saveKidInfo = function(chatObj,a){
     currentKid = chatObj;
     amt = a;
+    return;
+  }
+  var saveEarnedAmount = function(eamt){
+   earnedAmt = eamt;
+  }
+  
+  var getEarnedAmount = function(){
+   return earnedAmt;
   }
   
   var getAmount = function(){
     return amt;
+  }
+  
+  var setAmount = function(amt1){
+     amt = amt1;
   }
   
   var getCurrentKid = function(){
@@ -50,6 +63,9 @@ angular.module('starter.services', [])
   }
 
   return {
+    setAmount:setAmount,
+    getEarnedAmount:getEarnedAmount,
+    saveEarnedAmount:saveEarnedAmount,
     addQAnswer: addQAnswer,
     getQAnswers: getQAnswers,
     clearQAnswers:clearQAnswers,

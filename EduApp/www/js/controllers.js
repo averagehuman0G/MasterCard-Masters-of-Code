@@ -56,14 +56,17 @@ angular.module('starter.controllers', [])
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats,qresponseService) {
   console.log('$stateParams.chatId -->',$stateParams.chatId);
-  $scope.showSuccess = false;
+  $scope.showSuccessFlag = false;
   $scope.chat = Chats.get($stateParams.chatId);
   
   //Add any parent submission info..
   $scope.saveFor = function(chatObj,amt){
     console.log('-->>',chatObj,amt);
+    
     qresponseService.saveKidInfo(chatObj,amt);
-    $scope.showSuccess = true
+    
+    $scope.showSuccessFlag = true;
+    
    // alert("alert");
   }
   
@@ -76,13 +79,17 @@ angular.module('starter.controllers', [])
 })
 
 .controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate,$state,$timeout,qresponseService,kiddyServices) {
-  var cardTypes = [{ title: 'Swipe down to clear the card', image: 'img/pic.png',id:1 },
-    { title: 'Where is this?', image: 'img/max.png',id:2 },
-    { title: 'What kind of grass is this?', image: 'img/mike.png',id:3 },
-    { title: 'What beach is this?', image: 'img/perry.png',id:4 },
-    { title: 'What kind of clouds are these?', image: 'img/liam.png',id:5 }];
+  var cardTypes = [/*{ title: 'Swipe down to clear the card', image: '#',id:1 },*/
+    { title: 'Did Steve Jobs found Apple on his own?', image: 'img/apple.jpg',id:2,answer:'Y' },
+    { title: 'Is IRS a private company?', image: 'img/IRS.gif',id:3,answer:'N' },
+    { title: 'A savings bond is a way to earn money from income saved?', image: 'img/bond.jpg',id:4 ,answer:'N'}/*,
+    { title: 'Is a budget plan a good way to manage money productively?', image: 'img/budget.jpg',id:5 }*/];
     
     $scope.showCards = true;
+    if(!qresponseService.getAmount()){
+    qresponseService.setAmount(10);
+  }
+    $scope.amt = qresponseService.getAmount();
 
   $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
 
@@ -156,7 +163,7 @@ angular.module('starter.controllers', [])
        //alert("no more cards ---> ");
        
        //invoke the service call based on this...
-      qresponseService.clearQAnswers();
+      //qresponseService.clearQAnswers();
       $scope.showCards = false;
       var rNum = '4'+parseInt(Math.random()*100000000000000000, 19);
       console.log('rNum -->',rNum);
@@ -186,16 +193,73 @@ angular.module('starter.controllers', [])
 })
 
 .controller('CardCtrl', function($scope, $ionicSwipeCardDelegate,qresponseService) {
+  
+  
+  var cardTypes = [/*{ title: 'Swipe down to clear the card', image: '#',id:1 },*/
+    { title: 'Did Steve Jobs found Apple on his own?', image: 'img/apple.jpg',id:2,answer:'Y' },
+    { title: 'Is IRS a private company?', image: 'img/IRS.gif',id:3,answer:'N' },
+    { title: 'A savings bond is a way to earn money from income saved?', image: 'img/bond.jpg',id:4 ,answer:'N'}/*,
+    { title: 'Is a budget plan a good way to manage money productively?', image: 'img/budget.jpg',id:5 }*/];
+  var howmanyCorrect = 0;
+  
+  $scope.getCardAt = function(id){
+    var arrayLength = cardTypes.length;
+for (var i = 0; i < arrayLength; i++) {
+    var card = cardTypes[i];
+    return card;
+    //Do something
+}
+  }
+  
   $scope.goAway = function(currentCard,index,answer) {
     var card = $ionicSwipeCardDelegate.getSwipebleCard($scope);
     //console.log("CardCtrl ---->>> ",index,currentCard,card);
-    card.response = answer;
-    qresponseService.addQAnswer(card);
+    currentCard.response = answer;
+    qresponseService.addQAnswer(currentCard);
     card.swipe();
   };
 })
 .controller('EndQuestionsCtrl', function($scope, $ionicSwipeCardDelegate,qresponseService) {
-  console.log('EndQuestionsCtrl -->');
+  var cardTypes = [/*{ title: 'Swipe down to clear the card', image: '#',id:1 },*/
+    { title: 'Did Steve Jobs found Apple on his own?', image: 'img/apple.jpg',id:2,answer:'Y' },
+    { title: 'Is IRS a private company?', image: 'img/IRS.gif',id:3,answer:'N' },
+    { title: 'A savings bond is a way to earn money from income saved?', image: 'img/bond.jpg',id:4 ,answer:'N'}/*,
+    { title: 'Is a budget plan a good way to manage money productively?', image: 'img/budget.jpg',id:5 }*/];
+  var howmanyCorrect = 0;
+  
+  $scope.findAnswer = function(id){
+    var arrayLength = cardTypes.length;
+for (var i = 0; i < arrayLength; i++) {
+    var card = cardTypes[i];
+    return card.answer;
+    //Do something
+}
+  }
+  
+  var allQList = qresponseService.getQAnswers();
+  console.log('allQList -->',allQList)
+    var allQLen = allQList.length;
+for (var i = 0; i < allQLen; i++) {
+    var q1 = allQList[i];
+    //console.log('q1 -->',q1);
+    if(q1.answer == q1.response){
+      //console.log('matched 11...');
+      howmanyCorrect++;
+    }else{
+     //console.log('not matched ...'); 
+    }
+    //Do something
+}
+  console.log('EndQuestionsCtrl -->',howmanyCorrect,' -->',qresponseService.getAmount());
+  if(howmanyCorrect == cardTypes.length){
+    $scope.earnedAmt1 = qresponseService.getAmount();
+  }else{
+    $scope.earnedAmt1 = parseInt(qresponseService.getAmount()/2+'');
+  }
+  console.log('$scope.earnedAmt1 --->',$scope.earnedAmt1);
+  //$scope.earnedAmt1 = 5;
+  qresponseService.clearQAnswers();
+  
 })
 
 .controller('SettingsCtrl', function($scope, $ionicSwipeCardDelegate,qresponseService) {
