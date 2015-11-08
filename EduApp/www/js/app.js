@@ -81,6 +81,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
         }
       }
     })
+    .state('tab.questions', {
+       url: '/questions/:sessionId',
+      views: {
+        'tab-dash': {
+          templateUrl: "templates/view-questions.html",
+          controller: 'CardsCtrl'
+        }
+      }
+    })
 
   .state('tab.chats', {
       url: '/chats',

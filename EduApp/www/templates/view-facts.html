@@ -2,9 +2,14 @@
   <ion-content>
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats" type="item-text-wrap" href="#/tab/facts/{{chat.id}}">
-        <img ng-src="{{chat.face}}">
-        <h2>{{chat.name}}</h2>
-        <p>{{chat.lastText}}</p>
+        <div id="images">
+          <img class="kidsImages" ng-src="{{chat.face}}">
+        </div>
+      <div id="kidsInfo">
+         <h2>{{chat.name}}</h2>
+        <p>{{chat.age}}</p>
+      </div>
+       
         <i class="icon ion-chevron-right icon-accessory"></i>
 
         <ion-option-button class="button-assertive" ng-click="remove(chat)">
