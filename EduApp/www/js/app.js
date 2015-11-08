@@ -113,12 +113,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
       }
     })
 
-  .state('tab.chats', {
-      url: '/chats',
+  .state('tab.cards', {
+      url: '/cards',
       views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
+        'tab-cards': {
+          templateUrl: 'templates/tab-cards.html'
         }
       }
     })

@@ -6,18 +6,19 @@
 -->
 <ion-view view-title="{{chat.name}}">
   <ion-content class="padding">
+    <div ng-show="!showSuccess">
     <img ng-src="{{chat.face}}" id="kidsImg">
     <div id="moneyAmounts">
-      <button class="button button-calm">
+      <button class="button button-calm" ng-click="saveFor(chat,2)">
   $2
 </button>
-<button class="button button-calm">
+<button class="button button-calm" ng-click="saveFor(chat,5)">
   $5
 </button>
-<button class="button button-calm">
+<button class="button button-calm" ng-click="saveFor(chat,10)">
   $10
 </button>
-<button class="button button-calm">
+<button class="button button-calm" ng-click="saveFor(chat,20)">
   $20
 </button>
     </div>
@@ -25,12 +26,26 @@
       <div class="list list-inset ">
   <label class="item item-input ">
     <i class="icon ion-cash placeholder-icon cash-big"></i>
-    <input type="text" placeholder="allownace">
+    <input type="text" placeholder="allownace" ng-model="otherPayment">
   </label>
 </div>
-              <a class="button button-full button-balanced" href="#/tab/facts/11/50">Send to {{chat.name.split(" ")[0]}}</a>
+              <a class="button button-full button-balanced" ng-click="saveFor(chat,otherPayment)" >Send to {{chat.name.split(" ")[0]}}</a>
 
     </div>
+    </div>
+    <div ng-show="showSuccess">
+      
+      <div class="card">
+  <div class="item item-divider">
+    Success
+  </div>
+  <div class="item item-text-wrap">
+    Transfer is initiated. {{chat.name.split(" ")[0]}} will love this.
+  </div>
+  <div class="item item-divider">
     
+  </div>
+</div>
+    </div>
   </ion-content>
 </ion-view>

@@ -34,11 +34,28 @@ angular.module('starter.services', [])
   var clearQAnswers = function(){
       qAnswerList=[];
   };
+  var currentKid = {};
+  var amt;
+  var saveKidInfo = function(chatObj,a){
+    currentKid = chatObj;
+    amt = a;
+  }
+  
+  var getAmount = function(){
+    return amt;
+  }
+  
+  var getCurrentKid = function(){
+    return currentKid;
+  }
 
   return {
     addQAnswer: addQAnswer,
     getQAnswers: getQAnswers,
-    clearQAnswers:clearQAnswers
+    clearQAnswers:clearQAnswers,
+    saveKidInfo:saveKidInfo,
+    getAmount:getAmount,
+    getCurrentKid:getCurrentKid
   };
 
 })

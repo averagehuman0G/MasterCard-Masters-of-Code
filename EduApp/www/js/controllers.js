@@ -2,7 +2,7 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope) {})
 
-.controller('ChatsCtrl', function($scope, Chats) {
+.controller('ChatsCtrl', function($scope, Chats,$ionicPopup, $timeout) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -10,21 +10,64 @@ angular.module('starter.controllers', [])
   //
   //$scope.$on('$ionicView.enter', function(e) {
   //});
+  console.log('22...');
+  $scope.showPopup = function() {
+    console.log('111');
+  $scope.data = {}
 
-  $scope.chats = Chats.all();
+  // An elaborate, custom popup
+  var myPopup = $ionicPopup.show({
+    template: '<input type="password" ng-model="data.wifi">',
+    title: 'Enter your passcode to unlock',
+    subTitle: '',
+    scope: $scope,
+    buttons: [
+      {
+        text: '<b>Unlock</b>',
+        class:'button icon ion-gear-a',
+        type: 'button-positive',
+        onTap: function(e) {
+          if (!$scope.data.wifi) {
+            //don't allow the user to close unless he enters wifi password
+            e.preventDefault();
+          } else {
+            return $scope.data.wifi;
+          }
+        }
+      }
+    ]
+  });
+  myPopup.then(function(res) {
+    console.log('Tapped!', res);
+    $timeout(function() {
+      $scope.chats = Chats.all();  }, 500);
+  });
+  /*$timeout(function() {
+     myPopup.close(); //close the popup after 3 seconds for some reason
+  }, 3000);*/
+ };
+
+  $scope.showPopup();
+  
   $scope.remove = function(chat) {
     Chats.remove(chat);
   };
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
+.controller('ChatDetailCtrl', function($scope, $stateParams, Chats,qresponseService) {
   console.log('$stateParams.chatId -->',$stateParams.chatId);
+  $scope.showSuccess = false;
   $scope.chat = Chats.get($stateParams.chatId);
   
   //Add any parent submission info..
-  $scope.submitMyPayment = function(){
+  $scope.saveFor = function(chatObj,amt){
+    console.log('-->>',chatObj,amt);
+    qresponseService.saveKidInfo(chatObj,amt);
+    $scope.showSuccess = true
    // alert("alert");
   }
+  
+  
   
   $scope.settings = {
     enableFriends: true
